@@ -1,0 +1,9 @@
+terraform {
+  required_version = ">= 1.0" # Минимальная версия Terraform, необходимая для работы конфигурации
+  required_providers {
+    proxmox = {
+      source  = "telmate/proxmox" # Официальный источник провайдера в Terraform Registry
+      version = "3.0.1-rc6" # Фиксация версии провайдера для обеспечения стабильности и воспроизводимости
+    }
+  }
+}
