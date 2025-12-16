@@ -1,0 +1,10 @@
+Infrastructure as Code with Terraform and Proxmox
+Описание проекта
+Проект демонстрирует управление виртуальной инфраструктурой Proxmox с помощью Terraform.
+
+Быстрый старт
+Заполните terraform.tfvars реальными значениями
+Выполните:
+terraform init
+terraform plan
+terraform apply
