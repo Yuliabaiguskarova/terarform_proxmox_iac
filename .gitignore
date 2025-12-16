@@ -1,10 +1,10 @@
-.terraform/
-*.tfstate
-*.tfstate.backup
-*.tfvars
-.terraform.tfstate.lock.info
-.terraformrc
-terraform.tfvars
-.vscode/
-.idea/
-*.log
+.terraform/ # Папка кэша провайдеров и модулей Terraform
+*.tfstate # Основной файл состояния Terraform
+*.tfstate.backup # Резервная копия файла состояния
+*.tfvars # Файлы значений переменных Terraform
+.terraform.tfstate.lock.info # Файл блокировки состояния
+.terraformrc # Пользовательский конфигурационный файл CLI Terraform
+terraform.tfvars # Основной файл с значениями переменных по умолчанию
+.vscode/ # Служебные файлы и папки IDE/редакторов
+.idea/ # Директория настроек JetBrains IDE (PyCharm, IntelliJ IDEA, GoLand и др.)
+*.log # Файлы логов и отладочной информации
