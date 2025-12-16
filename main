@@ -1,0 +1,41 @@
+# Создаю виртуальной машины в Proxmox
+resource "proxmox_vm_qemu" "infrastructure_vm" {
+
+# Обязательные параметры ВМ
+vmid = var.vm_id # Уникальный идентификатор ВМ в Proxmox
+name = var.vm_name # Отображаемое имя ВМ
+target_node = var.target_node # Имя ноды кластера, где будет развернута ВМ
+
+# Выделяемые ресурсы
+cores = var.vm_cores # Количество CPU ядер
+memory = var.vm_memory # Объем оперативной памяти (МБ)
+agent = 1 # Включить QEMU Guest Agent для управления изнутри гостевой ОС
+
+# Конфигурация системного диска
+disk {
+slot = "scsi0" # Номер слота для подключения (scsi0, scsi1 и т.д.)
+size = var.vm_disk_size # Размер диска в гигабайтах
+storage = "local-lvm" # Имя хранилища в Proxmox
+type = "disk" # Тип устройства: диск, CD-ROM или cloud-init
+}
+
+# Конфигурация сетевого интерфейса
+network {
+id = 0 # Порядковый номер сетевого устройства (0, 1, 2...)
+model = "virtio" # Драйвер виртуальной сетевой карты (высокая производительность)
+bridge = "vmbr0" # Имя сетевого моста Proxmox для подключения
+}
+
+# Параметры загрузки и поведения
+boot = "order=scsi0" # Порядок загрузки: первичное устройство - системный диск
+onboot = true # Автоматически запускать ВМ при загрузке хоста Proxmox
+}
+
+# Экспорт информации о созданной виртуальной машине
+output "vm_info" {
+value = {
+name = proxmox_vm_qemu.infrastructure_vm.name # Имя ВМ
+id = proxmox_vm_qemu.infrastructure_vm.vmid # ID ВМ в Proxmox
+node = proxmox_vm_qemu.infrastructure_vm.target_node # Нода размещения
+}
+}
